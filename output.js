@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Process a given dimer node at a time
  *
@@ -8,42 +10,42 @@
  *
  * @return {Mixed}
  */
-function processNode (node, createElement, processFn) {
+function processNode(node, createElement, processFn) {
   /**
    * Ignore dimertitle and dimerTitle
    */
   if (['dimertitle', 'dimerTitle'].indexOf(node.tag) > -1) {
-    return
+    return;
   }
 
   /**
    * Return raw value
    */
   if (node.type === 'text') {
-    return node.value
+    return node.value;
   }
 
   /**
    * Normalize class name
    */
   if (node.props && node.props.className) {
-    node.props.class = node.props.className
-    delete node.props.className
+    node.props.class = node.props.className;
+    delete node.props.className;
   }
 
   /**
    * Invoke processFn to see if they want to render custom elements
    * or components
    */
-  const output = processFn(node, function (child) {
-    return processNode(child, createElement, processFn)
-  }, createElement)
+  var output = processFn(node, function (child) {
+    return processNode(child, createElement, processFn);
+  }, createElement);
 
   /**
    * If they return explicit false, then skip the node
    */
   if (output === false) {
-    return
+    return;
   }
 
   /**
@@ -51,41 +53,41 @@ function processNode (node, createElement, processFn) {
    */
   if (!output) {
     return createElement(node.tag, { attrs: node.props }, node.children.map(function (child) {
-      return processNode(child, createElement, processFn)
-    }))
+      return processNode(child, createElement, processFn);
+    }));
   }
 
   /**
    * Return output
    */
-  return output
+  return output;
 }
 
 module.exports = {
-  install (Vue, options) {
-    options = options || {}
-    options.processFn = options.processFn || function () {}
+  install: function install(Vue, options) {
+    options = options || {};
+    options.processFn = options.processFn || function () {};
 
     Vue.component('DimerTree', {
-      data: function () {
-        return { processFn: options.processFn }
+      data: function data() {
+        return { processFn: options.processFn };
       },
 
       props: {
         node: {
-          validator (node) {
-            return node && Array.isArray(node.children)
+          validator: function validator(node) {
+            return node && Array.isArray(node.children);
           }
         }
       },
 
-      render (createElement) {
+      render: function render(createElement) {
         return processNode({
           tag: 'div',
           props: { className: 'root' },
           children: this.node.children
-        }, createElement, this.processFn)
+        }, createElement, this.processFn);
       }
-    })
+    });
   }
-}
+};
