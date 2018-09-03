@@ -1,7 +1,7 @@
 {
   "name": "dimer-tree-vue",
   "version": "1.0.0",
-  "description": "",
+  "description": "Converts dimer markdown AST node to Vue components",
   "main": "output.js",
   "files": [
     "output.js"
@@ -51,5 +51,20 @@
     "ignore": [
       "output.js"
     ]
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimerapp/dimer-tree-vue.git"
+  },
+  "keywords": [
+    "dimer"
+  ],
+  "bugs": {
+    "url": "https://github.com/dimerapp/dimer-tree-vue/issues"
+  },
+  "homepage": "https://github.com/dimerapp/dimer-tree-vue#readme"
 }
