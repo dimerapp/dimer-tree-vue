@@ -17,8 +17,8 @@
   "author": "virk",
   "license": "MIT",
   "devDependencies": {
-    "@adonisjs/mrm-preset": "^1.0.10",
-    "@dimerapp/markdown": "^3.0.0",
+    "@adonisjs/mrm-preset": "^1.0.11",
+    "@dimerapp/markdown": "^3.1.0",
     "@vue/server-test-utils": "^1.0.0-beta.24",
     "@vue/test-utils": "^1.0.0-beta.24",
     "babel-cli": "^6.26.0",
@@ -31,7 +31,7 @@
     "japa-cli": "^1.0.1",
     "mrm": "^1.2.1",
     "pkg-ok": "^2.2.0",
-    "standard": "^11.0.1",
+    "standard": "^12.0.1",
     "vue": "^2.5.17",
     "vue-server-renderer": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
@@ -48,6 +48,8 @@
     ]
   },
   "standard": {
-    "ignore": ["output.js"]
+    "ignore": [
+      "output.js"
+    ]
   }
 }
