@@ -24,14 +24,6 @@ function processNode (node, createElement, processFn) {
   }
 
   /**
-   * Normalize class name
-   */
-  if (node.props && node.props.className) {
-    node.props.class = node.props.className
-    delete node.props.className
-  }
-
-  /**
    * Invoke processFn to see if they want to render custom elements
    * or components
    */
@@ -50,7 +42,16 @@ function processNode (node, createElement, processFn) {
    * If they return nothing, then we will render the node ourselves
    */
   if (!output) {
-    return createElement(node.tag, { attrs: node.props }, node.children.map(function (child) {
+    const attrs = Object.keys(node.props).reduce(function (result, key) {
+      if (key === 'className') {
+        result.class = node.props.className.join(' ')
+      } else {
+        result[key] = node.props[key]
+      }
+      return result
+    }, {})
+
+    return createElement(node.tag, { attrs }, node.children.map(function (child) {
       return processNode(child, createElement, processFn)
     }))
   }
@@ -82,7 +83,7 @@ module.exports = {
       render (createElement) {
         return processNode({
           tag: 'div',
-          props: { className: 'root' },
+          props: { className: ['root'] },
           children: this.node.children
         }, createElement, this.processFn)
       }

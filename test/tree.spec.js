@@ -91,4 +91,24 @@ test.group('Tree', (group) => {
 
     assert.equal(output.find('#hello').text(), 'Hello')
   })
+
+  test('assing classes to the element', async (assert) => {
+    const template = dedent`
+    [note]
+    hello
+    [/note]
+    `
+
+    const json = await (new Markdown(template, {
+      skipToc: true
+    })).toJSON()
+
+    const output = utils.render(freshInstance(), {
+      propsData: {
+        node: json.contents
+      }
+    })
+
+    assert.equal(output.find('.alert').text(), 'hello')
+  })
 })

@@ -16,7 +16,7 @@
 </div>
 
 # Dimer Tree Vue
-> Converts dimer markdown AST node to HTML using Vue
+> Converts dimer markdown AST node to Vue components.
 
 [![travis-image]][travis-url]
 [![npm-image]][npm-url]
