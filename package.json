@@ -1,6 +1,6 @@
 {
   "name": "dimer-tree-vue",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Converts dimer markdown AST node to Vue components",
   "main": "output.js",
   "files": [
